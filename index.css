@@ -20,7 +20,9 @@ body {
 .task-planner {
     display: flex;
     flex-direction: column;
-    width: 500px;
+    max-width: 500px;
+    width: 100%;
+    margin: 20px;
     gap: 30px;
     justify-self: center;
     align-self: center;
@@ -113,7 +115,6 @@ body {
 
 @media (max-width: 500px) {
     .task-planner {
-        margin: 20px;
         padding: 20px;
     }
 
