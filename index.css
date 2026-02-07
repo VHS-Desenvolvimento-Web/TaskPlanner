@@ -1,0 +1,120 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI';
+}
+
+p, h1, h2, h3, ul, ol, li {
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+}
+
+.task-planner {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    gap: 30px;
+    justify-self: center;
+    align-self: center;
+    border: 3px solid #000;
+    border-radius: 30px;
+    box-shadow: 0px 5px 0px #000;
+    background-color: #fff;
+    padding: 30px;
+}
+
+.task-bar {
+    border-radius: 30px;
+    padding: 10px;
+    border: 3px solid #000;
+    box-shadow: 0px 5px 0px #000;
+}
+
+.add-btn {
+    border-radius: 20px;
+    padding: 10px;
+    max-width: 150px;
+    display: flex;
+    align-self: center;
+    border: 3px solid #000;
+    box-shadow: 0px 5px 0px #000;
+}
+
+.add-btn:hover {
+    box-shadow: 0px 0px 0px #000;
+    translate: 0px 5px;
+    background-color: #dbdbdb;
+}
+
+.message {
+    display: flex;
+    align-self: center;
+    background-color: #dbdbdb;
+    border: 3px solid #000;
+    border-radius: 20px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.tasks {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #fff;
+    padding: 30px;
+    gap: 20px;
+    max-height: 400px;
+    min-height: 200px;
+    overflow-y: scroll;
+    list-style: none;
+    border: 3px solid #000;
+    border-radius: 5px;
+    box-shadow: 0px 5px 0px #000;
+}
+
+.new-task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: inherit;
+    padding: 10px;
+    border: 3px solid #000;
+    border-radius: 20px;
+}
+
+.delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    background-color: #d12727;
+    color: #fff;
+    border: 3px solid #000;
+    border-radius: 100%;
+    box-shadow: 0px 3px 0px #000;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+}
+
+.delete-btn:hover {
+    translate: 0px 3px;
+    box-shadow: 0px 0px 0px #000;
+}
+
+@media (max-width: 500px) {
+    .task-planner {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .tasks {
+        padding: 15px;
+    }
+}
