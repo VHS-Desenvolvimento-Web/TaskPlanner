@@ -1,44 +1,122 @@
-function addTask() {
-    const taskBar = document.querySelector('#taskBar');
-    const message = document.querySelector('#message');
-    let task = taskBar.value.trim();
+const mensagem = document.querySelector('#mensagem');
+const botaoLimpar = document.querySelector('#botaoLimpar');
+let tarefas = [];
 
-    if (task == '') {
-        errorMessage = 'Digite algo para adicionar uma tarefa.'
-        message.textContent = errorMessage;
-        message.style.backgroundColor = '#d12727';
-        message.style.color = '#fff';
+function adicionarTarefa() {
+    const inputTarefa = document.querySelector('#inputTarefa');
+    let tarefa = inputTarefa.value.trim();
+
+    if (tarefa == '') {
+        mudarMensagemErro();
+    } else {
+        mudarMensagemSucesso();
+        tarefas.push(tarefa);
+        renderizarTarefas();
+        mostrarBotao();
+        console.log(tarefa);
     }
 
-    else {
-        const tasks = document.querySelector('#tasks');
+    inputTarefa.value = '';
+}
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.className = 'delete-btn';
+function renderizarTarefas() {
+    const listaTarefas = document.querySelector('#listaTarefas');
+    listaTarefas.innerHTML = ''; // esvazia a lista para quando ela for reescrita, não repetir as mesmas tarefas
 
-        const deleteIcon = document.createElement('i');
-        deleteIcon.className = 'fa-solid fa-trash-can';
+    for (let i = 0; i < tarefas.length; i++) {
+        let novaTarefa = document.createElement('li');
+        novaTarefa.className = 'nova-tarefa';
+        novaTarefa.textContent = tarefas[i];
 
-        let newTask = document.createElement('li');
-        newTask.className = 'new-task';
+        const botaoRemover = document.createElement('button')
+        botaoRemover.className = 'botao-remover'
+        botaoRemover.onclick = () => removerTarefa(i); // (2/2) aqui, o "i" é uma variável também, mas já tem um valor, ou seja, é um argumento.
 
-        sucessMessage = 'Tarefa adicionada com sucesso!';
-        message.textContent = sucessMessage;
-        message.style.backgroundColor = '#84dd1e';
-        message.style.color = '#fff';
+        // os parênteses de uma função são usados para entregar um valor de uma função para outra
+        // nesse caso, foi usado o parênteses no removerTarefa() para levar o índice (i) de qual tarefa será excluída
+        // tem que colocar o tal valor na declaração da função, e quando for chamá-la para trabalhar
+        // quando colocamos o (i) na chamada e definição da função, nós levamos uma variável que era pra ser local
+        // da função pai (que é o for) para virar local da função filho "removerTarefa()"
+        // pense assim: “quando alguém clicar, eu vou usar este i aqui.”
+        // quando ele é clicado, o valor de i é lido, copiado e entregue como parâmetro para o removerTarefa()
 
+        const iconeRemover = document.createElement('i');
+        iconeRemover.className = 'fa-solid fa-trash-can';
 
-        newTask.textContent = task;
-        tasks.appendChild(newTask);
-        newTask.appendChild(deleteBtn);
-        deleteBtn.appendChild(deleteIcon);
+        const botaoEditar = document.createElement('button')
+        botaoEditar.className = 'botao-editar'
+        botaoEditar.onclick = () => editarTarefa(i); // arrow function (=>) é usado para melhor visualização de uma função
+        // nesse caso para que o .onclick funcione corretamente, é necessário uma outra função para chamar o editarTarefa(i). 
+        const iconeEditar = document.createElement('i');
+        iconeEditar.className = 'fa-solid fa-pencil';
 
-        deleteBtn.addEventListener('click', function () {
-            deleteBtn.parentElement.remove();  // .remove() desprende o deleteBtn (filho) de seu pai (newTask/tarefa),
-        });                                    // fazendo com que ele suma.
+        const botoes = document.createElement('div');
+        botoes.className = 'botoes';
 
-        console.log(newTask.textContent);
+        botoes.appendChild(botaoRemover);
+        botoes.appendChild(botaoEditar);
+        botaoRemover.appendChild(iconeRemover);
+        botaoEditar.appendChild(iconeEditar);
+        novaTarefa.appendChild(botoes);
+        listaTarefas.appendChild(novaTarefa);
     }
+}
 
-    taskBar.value = '';
+function removerTarefa(i) { // (1/2) aqui, o "i" é um parâmetro, não tem valor, é só uma variável que será usada dentro da função e que receberá um valor. (volte para o for loop)
+    
+    tarefas.splice(i, 1); // o (*, 1) é quantidade de tarefas (índices) que serão excluídas
+    // o (i, *) é o índice que o removerTarefa() trouxe para saber qual tarefa será excluída (sair do array pelo splice)
+    mostrarBotao(); // chama a função para atualizar o estado do botão quando apagar uma tarefa
+    renderizarTarefas();
+    // por último, se renderiza a lista de tarefas novamente para mostrar a versão atualizada (sem a tarefa excluída).
+}
+
+function editarTarefa(i) {
+    let tarefaEditada = prompt("Escolha um novo nome para sua tarefa:");
+    if (tarefaEditada.trim !== "") {
+        tarefas[i] = tarefaEditada;
+        renderizarTarefas();
+    }
+}
+
+function limparLista() {
+    tarefas.length = 0;
+    mudarMensagemLimpar();
+    mostrarBotao(); // chama a função para atualizar o estado do botão quando apagar todas as tarefas
+    renderizarTarefas();
+}
+
+function mostrarBotao() {
+    if (tarefas.length > 0) {
+        botaoLimpar.style.display = 'flex';
+    } else {
+        botaoLimpar.style.display = 'none';
+    }
+}
+
+// inicializa estado do botão ao carregar o script
+mostrarBotao();
+
+// Parâmetro é uma variável nova que recebe um valor no momento da execução da função.
+// É na definição da função, durante a execução.
+
+// Argumento é o valor que você passa para uma função quando a chama.
+// É na chamada da função, antes da execução.
+
+function mudarMensagemErro() {
+    mensagem.textContent = 'Digite algo para adicionar uma tarefa.'
+    mensagem.style.backgroundColor = '#d12727';
+    mensagem.style.color = '#fff';
+}
+
+function mudarMensagemSucesso() {
+    mensagem.textContent = 'Tarefa adicionada com sucesso!';
+    mensagem.style.backgroundColor = '#26a01b';
+    mensagem.style.color = '#fff';
+}
+
+function mudarMensagemLimpar() {
+    mensagem.textContent = 'Lista de tarefas limpa com sucesso!';
+    mensagem.style.backgroundColor = '#169957';
+    mensagem.style.color = '#fff';
 }

@@ -10,12 +10,15 @@
 </head>
 
 <body>
-    <h1>Task Planner</h1>
     <div class="task-planner">
-        <input type="text" id="taskBar" class="task-bar" placeholder="Adicione uma nova tarefa!">
-        <button onclick="addTask()" id="addBtn" class="add-btn">Adicionar tarefa</button>
-        <p id="message" class="message">Adicione uma tarefa!</p>
-        <ul id="tasks" class="tasks"></ul>
+        <h1>Planejador de Tarefas</h1>
+        <div class="planner">
+            <input type="text" id="inputTarefa" class="input-tarefa" placeholder="Adicione uma nova tarefa!">
+            <button onclick="adicionarTarefa()" id="botaoAdicionar" class="botao-adicionar">Adicionar tarefa</button>
+            <p id="mensagem" class="mensagem">Adicione uma tarefa!</p>
+            <ul id="listaTarefas" class="lista-tarefas"></ul>
+            <button onclick="limparLista()" id="botaoLimpar" class="botao-limpar">Apagar todas as tarefas</button>
+        </div>
     </div>
 
     <script src="index.js"></script>
