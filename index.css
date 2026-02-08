@@ -88,6 +88,7 @@ body {
     border-radius: 20px;
     padding: 20px;
     font-weight: bold;
+    opacity: 0;
 }
 
 .lista-tarefas {
