@@ -1,41 +1,38 @@
 * {
     box-sizing: border-box;
     font-family: 'Segoe UI';
-    transition: all 0.2s ease;
-}
-
-p,
-a,
-h1,
-h2,
-h3,
-h4,
-ul,
-ol,
-li {
     margin: 0;
+    transition: all 0.2s ease;
 }
 
 body {
     margin: 0;
     height: 100vh;
+    width: 100vw;
 }
 
 .task-planner {
     display: flex;
     justify-self: center;
     align-items: center;
+    max-width: 700px;
+    width: 100%;
     flex-direction: column;
-    width: fit-content;
     margin-top: 50px;
+    gap: 20px;
+    margin: 10px;
+}
+
+.task-planner h1 {
+    margin: 10px;
+    text-align: center;
 }
 
 .planner {
     display: flex;
     flex-direction: column;
-    width: 500px;
+    width: 100%;
     height: auto;
-    margin: 20px;
     gap: 30px;
     justify-self: center;
     align-self: center;
@@ -133,7 +130,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: inherit;
+    width: 100%;
+    height: fit-content;
     padding: 10px;
     border: 3px solid #000;
     border-radius: 20px;
@@ -283,10 +281,14 @@ body {
     box-shadow: 0px 0px 0px #000;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 650px) {
+    .task-planner {
+        margin: 20px;
+    }
+
     .planner {
-        width: 400px;
         padding: 20px;
+        margin: 0;
     }
 
     .lista-tarefas {
@@ -294,14 +296,10 @@ body {
     }
 }
 
-@media (max-width: 450px) {
-    .planner {
-        width: 350px;
-    }
-}
-
-@media (max-width: 400px) {
-    .planner {
-        width: 300px;
+@media (max-width: 650px) {
+    .nova-tarefa {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
     }
 }
